@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <!-- Display state: the Studio Display is playing (blue, waves); the soundbar behind it is idle. -->
+  <defs>
+    <radialGradient id="glow" cx="72" cy="40" r="70" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0a84ff" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#0a84ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="alu" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f2f2f7"/>
+      <stop offset="1" stop-color="#aeaeb2"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#64d2ff"/>
+      <stop offset="0.55" stop-color="#0a84ff"/>
+      <stop offset="1" stop-color="#5e5ce6"/>
+    </linearGradient>
+  </defs>
+  <rect width="144" height="144" fill="url(#glow)"/>
+
+  <!-- soundbar, behind the display (idle) -->
+  <rect x="6" y="60" width="132" height="16" rx="8" fill="#2c2c2e"/>
+
+  <!-- stand -->
+  <path d="M63 64h18l3 21H60z" fill="url(#alu)"/>
+  <rect x="48" y="84" width="48" height="5" rx="2.5" fill="url(#alu)"/>
+
+  <!-- Studio Display -->
+  <rect x="34" y="14" width="76" height="50" rx="4" fill="url(#alu)"/>
+  <rect x="36.5" y="16.5" width="71" height="45" rx="2" fill="#000"/>
+  <rect x="38.5" y="18.5" width="67" height="41" rx="1" fill="url(#screen)"/>
+
+  <!-- sound waves from the display's sides -->
+  <g fill="none" stroke="#64d2ff" stroke-width="4.5" stroke-linecap="round">
+    <path d="M27.1 33.2A9 9 0 0 0 27.1 44.8M116.9 33.2A9 9 0 0 1 116.9 44.8"/>
+    <path d="M20.2 27.4A18 18 0 0 0 20.2 50.6M123.8 27.4A18 18 0 0 1 123.8 50.6" opacity="0.7"/>
+    <path d="M13.3 21.6A27 27 0 0 0 13.3 56.4M130.7 21.6A27 27 0 0 1 130.7 56.4" opacity="0.4"/>
+  </g>
+</svg>

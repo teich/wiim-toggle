@@ -1,0 +1,29 @@
+{
+  "Actions": [
+    {
+      "UUID": "net.teich.wiimtoggle.toggle",
+      "Name": "WiiM Toggle",
+      "Tooltip": "Switch between the display speakers and the WiiM (optical via USB SPDIF).",
+      "Icon": "wiim",
+      "States": [
+        { "Image": "display", "Title": "Display" },
+        { "Image": "wiim", "Title": "WiiM" }
+      ],
+      "DisableAutomaticStates": true,
+      "SupportedInMultiActions": false,
+      "Controllers": ["Keypad"]
+    }
+  ],
+  "Author": "Oren Teich",
+  "CodePathMac": "wiimtoggle",
+  "Description": "Toggle the Mac between its display speakers and the WiiM Ultra.",
+  "Name": "WiiM Toggle",
+  "Icon": "wiim",
+  "Category": "WiiM",
+  "CategoryIcon": "wiim",
+  "UUID": "net.teich.wiimtoggle",
+  "Version": "1.0.0.0",
+  "OS": [{ "Platform": "mac", "MinimumVersion": "13" }],
+  "SDKVersion": 2,
+  "Software": { "MinimumVersion": "6.4" }
+}

@@ -1,0 +1,61 @@
+#!/bin/zsh
+# Toggle the Mac between its own speakers and the WiiM Amp Ultra.
+#
+#   to WiiM:     remember the display's volume, WiiM -> optical in,
+#                USB SPDIF at 100% (the WiiM controls loudness), output -> USB SPDIF
+#   to display:  output -> Studio Display at the remembered volume, WiiM -> Wi-Fi
+#
+# Direction comes from the current default output, so it stays right even if
+# the output was changed some other way. Run with "wiim" or "display" to force one.
+
+set -u
+
+WIIM_HOST="Wiim-Ultra.local"
+WIIM_INPUT="optical"
+DISPLAY_OUT="Studio Display Speakers"
+SPDIF_OUT="USB SPDIF Audio"
+
+AUDIO="$HOME/.local/bin/audio-device"
+STATE_DIR="$HOME/.local/state/wiim-toggle"
+SAVED_VOLUME="$STATE_DIR/display-volume"
+LOG="$STATE_DIR/log"
+
+mkdir -p "$STATE_DIR"
+log() { print -r -- "$(date '+%F %T') $*" >> "$LOG" }
+
+wiim_mode() {
+  local reply
+  reply=$(curl -sk --max-time 4 "https://$WIIM_HOST/httpapi.asp?command=setPlayerCmd:switchmode:$1")
+  if [[ $reply != OK ]]; then
+    log "WiiM switch to $1 failed: ${reply:-no response}"
+    osascript -e "display notification \"Couldn't switch the WiiM to $1\" with title \"WiiM toggle\""
+  fi
+}
+
+to_wiim() {
+  local vol
+  vol=$("$AUDIO" get-volume "$DISPLAY_OUT")
+  [[ $vol == <-> ]] && print -r -- "$vol" > "$SAVED_VOLUME"
+  wiim_mode "$WIIM_INPUT"
+  # Set the level before switching so nothing ever plays at the old one.
+  "$AUDIO" set-volume "$SPDIF_OUT" 100
+  "$AUDIO" set-default "$SPDIF_OUT"
+  log "-> WiiM (display volume was $vol)"
+}
+
+to_display() {
+  local vol=""
+  [[ -r $SAVED_VOLUME ]] && vol=$(<"$SAVED_VOLUME")
+  [[ $vol == <-> ]] && "$AUDIO" set-volume "$DISPLAY_OUT" "$vol"
+  "$AUDIO" set-default "$DISPLAY_OUT"
+  wiim_mode wifi
+  log "-> display (volume ${vol:-unchanged})"
+}
+
+case "${1:-toggle}" in
+  wiim)    to_wiim ;;
+  display) to_display ;;
+  toggle)
+    if [[ $("$AUDIO" get-default | cut -f2) == "$SPDIF_OUT" ]]; then to_display; else to_wiim; fi ;;
+  *) print -u2 "usage: wiim-toggle [toggle|wiim|display]"; exit 2 ;;
+esac

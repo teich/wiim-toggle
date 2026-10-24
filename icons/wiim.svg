@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <!-- WiiM state: the 63" soundbar behind the display is playing (amber, waves); the display's speakers are idle. -->
+  <defs>
+    <radialGradient id="glow" cx="72" cy="68" r="72" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ff9f0a" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#ff9f0a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="alu" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8e8e93"/>
+      <stop offset="1" stop-color="#48484a"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7c7c80"/>
+      <stop offset="1" stop-color="#3a3a3c"/>
+    </linearGradient>
+  </defs>
+  <rect width="144" height="144" fill="url(#glow)"/>
+
+  <!-- soundbar, behind the display (playing) -->
+  <rect x="6" y="60" width="132" height="16" rx="8" fill="url(#bar)"/>
+  <rect x="11" y="68" width="18" height="3.5" rx="1.75" fill="#ff9f0a"/>
+  <rect x="115" y="68" width="18" height="3.5" rx="1.75" fill="#ff9f0a"/>
+
+  <!-- stand -->
+  <path d="M63 64h18l3 21H60z" fill="url(#alu)"/>
+  <rect x="48" y="84" width="48" height="5" rx="2.5" fill="url(#alu)"/>
+
+  <!-- Studio Display (dimmed) -->
+  <rect x="34" y="14" width="76" height="50" rx="4" fill="url(#alu)"/>
+  <rect x="36.5" y="16.5" width="71" height="45" rx="2" fill="#000"/>
+  <rect x="38.5" y="18.5" width="67" height="41" rx="1" fill="#1c1c1e"/>
+
+  <!-- sound waves rising from the soundbar's ends -->
+  <g fill="none" stroke="#ff9f0a" stroke-width="4.5" stroke-linecap="round">
+    <path d="M12 53.3A10 10 0 0 1 22 53.3M122 53.3A10 10 0 0 1 132 53.3"/>
+    <path d="M7.5 45.5A19 19 0 0 1 26.5 45.5M117.5 45.5A19 19 0 0 1 136.5 45.5" opacity="0.7"/>
+    <path d="M3 37.8A28 28 0 0 1 31 37.8M113 37.8A28 28 0 0 1 141 37.8" opacity="0.4"/>
+  </g>
+</svg>
